@@ -1,10 +1,13 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import type { Pokemon } from "../types/types";
 import { usePokemon } from "../hooks/usePokemon";
 
 interface PokemonContextProps {
     pokemons: Pokemon[],
+    filteredPokemons: Pokemon[],
     setPokemons: React.Dispatch<React.SetStateAction<Pokemon[]>>,
+    searchTerm: string,
+    setSearchTerm: (term: string) => void,
     loading: boolean,
     error: string | null;
 };
@@ -12,15 +15,30 @@ interface PokemonContextProps {
 export const PokemonContext = createContext<PokemonContextProps | undefined>(undefined);
 
 export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-       
+
+    const [searchTerm, setSearchTerm] = useState<string>("")
     const { pokemons, setPokemons, loading, error } = usePokemon();
+
+    const filteredPokemons = useMemo(() => {
+        if (searchTerm === "") {
+            return pokemons;
+        }
+        return pokemons.filter((pokemon) => {
+            pokemon.name.toLowerCase().includes(searchTerm)
+
+        });
+    }, [pokemons, searchTerm])
+
 
     const value = useMemo(() => ({
         pokemons,
+        filteredPokemons,
         setPokemons,
+        setSearchTerm,
+        searchTerm,
         loading,
         error
-    }), [pokemons, loading, error]);
+    }), [pokemons, filteredPokemons, loading, error]);
 
     return (
         <PokemonContext.Provider value={value}>
