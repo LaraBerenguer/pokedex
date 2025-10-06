@@ -1,4 +1,5 @@
 export const getUrlId = (url: string) => {
-    const id = url.charAt(url.length - 1)
+    const parts = url.split("/").filter(Boolean);
+    const id = parts[parts.length - 1];
     return id;
 };

@@ -1,11 +1,19 @@
-import { Link } from "react-router";
+import PokemonCard from "../components/PokemonCard";
+import { usePokemonContext } from "../context/PokemonContext";
 
 function Home() {
-  return (    
+  const { pokemons, loading, error } = usePokemonContext()
+
+  //return loading when spinner
+  return (
     <>
-    <h1>This is the pokedex</h1>
-    <div>These are pokemon</div>
-    <Link to="/pokemon" className="btn">Go to details</Link>
+      <section className="home-search">{/*Filter type and search section*/}</section>
+      <section className="home-filter">{/*Filter type and search section*/}</section>
+      <section className="home-list gap-2 flex flex-wrap">
+        {pokemons.map(p => <PokemonCard key={p.id} pkm={p} />)}
+        {pokemons.length == 0 && <p className="text-sm">Oop! There's no pokemon in this tall grass 🍃</p>}
+        {error && <p className="text-sm">{error}</p>}
+      </section>
     </>
   );
 };

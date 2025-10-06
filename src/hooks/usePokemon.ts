@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import type { Pokemon } from "../types/types";
 import { getUrlId } from "../utils/getUrlId";
 
+interface RawPokemon {
+  sprites: { front_default: string };
+  types: { type: { name: string } }[];
+  weight: number;
+  height: number;
+  stats: { base_stat: number; stat: { name: string } }[];
+}
+
 export function usePokemon() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -16,14 +24,17 @@ export function usePokemon() {
         const pokemons = await Promise.all(
           data.results.map(async (pokemon: { url: string, name: string }) => {
             const response = await fetch(pokemon.url);
-            const d = await response.json();
+            if (!response.ok) throw new Error(`Error fetching ${pokemon.name}`);
+            const d: RawPokemon = await response.json();
             const uId = getUrlId(pokemon.url)
 
             return {
               id: uId,
               name: pokemon.name,
               image: d.sprites.front_default,
-              types: d.types.map((t: any) => t.type.name),
+              types: d.types.map((t: any) => ({
+                name: t.type.name
+              })),
               weight: d.weight,
               height: d.height,
               stats: d.stats.map((s: any) => ({
@@ -37,6 +48,7 @@ export function usePokemon() {
         setPokemons(pokemons);
       } catch (err) {
         setError("Error loading pokémons");
+        console.error("Error processing pokémons", err);
       } finally {
         setLoading(false);
       }
