@@ -18,7 +18,11 @@ export function usePokemon() {
   useEffect(() => {
     const fetchPokemon = async () => {
       try {
+        setLoading(true);
+        setError("");
+
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
+        if (!response.ok) throw new Error(`Error fetching pokémon! Try again`);
         const data = await response.json();
 
         const pokemons = await Promise.all(
@@ -47,8 +51,13 @@ export function usePokemon() {
 
         setPokemons(pokemons);
       } catch (err) {
-        setError("Error loading pokémons");
+        if (err instanceof Error) {
+          setError(err.message)
+        } else {
+          setError("Error loading pokémons");
+        }
         console.error("Error processing pokémons", err);
+
       } finally {
         setLoading(false);
       }

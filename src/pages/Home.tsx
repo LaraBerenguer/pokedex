@@ -5,6 +5,15 @@ import { usePokemonContext } from "../context/PokemonContext";
 function Home() {
   const { pokemons, loading, error } = usePokemonContext()
   if (loading) { return <Spinner /> }
+  if (error) {
+    return (
+      <div className="text-center p-8">
+        <p className="text-red-500 mb-4">{error}</p>
+        <p className="text-gray-600 text-sm">Try refreshing the page</p>
+        <button className="text-sm text-decoration-line" onClick={() => window.location.reload()}>Refresh</button>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -13,7 +22,6 @@ function Home() {
       <section className="home-list gap-2 flex flex-wrap">
         {pokemons.map(p => <PokemonCard key={p.id} pkm={p} />)}
         {pokemons.length == 0 && <p className="text-sm">Oop! There's no pokemon in this tall grass 🍃</p>}
-        {error && <p className="text-sm">{error}</p>}
       </section>
     </>
   );
