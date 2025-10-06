@@ -10,11 +10,11 @@ const Search = () => {
     return (
         <input
             type="text"
-            className="form-control"
-            placeholder="Search pokemon..."
+            placeholder="Search Pokémon..."
             value={searchTerm}
             onChange={handleSearchChange}
-        ></input>
+            className="w-full px-4 py-2 border border-gray-200 rounded-md text-base bg-gray-50 text-gray-900 focus:outline-none focus:border-gray-400 transition-colors"
+        />
     )
 };
 

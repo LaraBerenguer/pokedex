@@ -1,9 +1,10 @@
 import PokemonCard from "../components/PokemonCard";
+import Search from "../components/Search";
 import Spinner from "../components/ui/Spinner";
 import { usePokemonContext } from "../context/PokemonContext";
 
 function Home() {
-  const { pokemons, loading, error } = usePokemonContext()
+  const { filteredPokemons, loading, error } = usePokemonContext()
   if (loading) { return <Spinner /> }
   if (error) {
     return (
@@ -16,14 +17,16 @@ function Home() {
   }
 
   return (
-    <>
-      <section className="home-search">{/*Filter type and search section*/}</section>
+    <section className="home flex flex-col gap-3 p-4">
+      <section className="home-search">
+        <Search />
+      </section>
       <section className="home-filter">{/*Filter type and search section*/}</section>
       <section className="home-list gap-2 flex flex-wrap">
-        {pokemons.map(p => <PokemonCard key={p.id} pkm={p} />)}
-        {pokemons.length == 0 && <p className="text-sm">Oop! There's no pokemon in this tall grass 🍃</p>}
+        {filteredPokemons.length ? filteredPokemons.map(p => <PokemonCard key={p.id} pkm={p} />) :
+            <p className="text-sm w-full text-center">Oops! There's no pokemon in this tall grass 🍃</p>}
       </section>
-    </>
+    </section>
   );
 };
 

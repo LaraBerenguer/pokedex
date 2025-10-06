@@ -24,7 +24,7 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({ child
             return pokemons;
         }
         return pokemons.filter((pokemon) => {
-            pokemon.name.toLowerCase().includes(searchTerm)
+            return pokemon.name.toLowerCase().includes(searchTerm)
 
         });
     }, [pokemons, searchTerm])
