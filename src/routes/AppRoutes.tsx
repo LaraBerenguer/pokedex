@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';
+import Spinner from '../components/ui/Spinner';
 //import Loading from '../components/Loading/Loading';
 
 const Home = lazy(() => import('../pages/Home'));
@@ -10,7 +11,7 @@ const Error500 = lazy(() => import('../pages/Error500'));
 //wrapper so it's less code
 const LazyWrapper = ({ component: Component }: { component: React.ComponentType }) => {
     return (
-        <Suspense /*fallback={<Loading />}*/>
+        <Suspense fallback={<Spinner />}>
             <Component />
         </Suspense >
     );
