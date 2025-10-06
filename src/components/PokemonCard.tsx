@@ -8,7 +8,7 @@ interface PokemonCardProps {
 
 const PokemonCard = ({ pkm }: PokemonCardProps) => {
     return (
-        <div className="pokemon-card border-2 border-gray-200 shadow-sm">
+        <div className="pokemon-card border-2 border-gray-200 shadow-sm p-2 flex flex-col gap-2">
             <div className="pokemon--card-fav">
                 <section className="pokemon--card--fav text-sm">☆</section>
             </div>
@@ -23,7 +23,7 @@ const PokemonCard = ({ pkm }: PokemonCardProps) => {
                     {pkm.types.map(t => <Badge key={t.name} type={t.name} />)}
                 </section>
             </div>
-            <button className="details-button">View Details</button>
+            <button className="details-button border-1 border-gray-400 rounded-lg p-1">View Details</button>
         </div>
     )
 
