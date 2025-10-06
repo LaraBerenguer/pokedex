@@ -1,6 +1,6 @@
 import type { Pokemon } from "../types/types";
 import { capitalizeFirstLetter } from "../utils/capitalize";
-import Badge from "./ui/badge";
+import Badge from "./ui/Badge";
 
 interface PokemonCardProps {
     pkm: Pokemon;
