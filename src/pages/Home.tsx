@@ -1,10 +1,11 @@
 import PokemonCard from "../components/PokemonCard";
+import Spinner from "../components/ui/Spinner";
 import { usePokemonContext } from "../context/PokemonContext";
 
 function Home() {
   const { pokemons, loading, error } = usePokemonContext()
+  if (loading) { return <Spinner /> }
 
-  //return loading when spinner
   return (
     <>
       <section className="home-search">{/*Filter type and search section*/}</section>
