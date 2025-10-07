@@ -9,7 +9,7 @@ const Filter = () => {
     };
 
     return (
-        <div className="">
+        <div className="flex gap-1">
             {typesLoading ?
                 (<p className="text-xs w-full text-center">Loading types...</p>
                 ) : typesError ? (
