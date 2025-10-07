@@ -33,7 +33,7 @@ export function usePokemon() {
             const uId = getUrlId(pokemon.url)
 
             return {
-              id: uId,
+              id: parseInt(uId),
               name: pokemon.name,
               image: d.sprites.front_default,
               types: d.types.map((t: any) => ({
