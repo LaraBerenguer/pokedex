@@ -41,10 +41,11 @@ export function usePokemon() {
               })),
               weight: d.weight,
               height: d.height,
-              stats: d.stats.map((s: any) => ({
-                name: s.stat.name,
-                base: s.base_stat,
-              })),
+              stats: d.stats.filter((s: any) => ["hp", "attack", "defense", "speed"].includes(s.stat.name))
+                .map((s: any) => ({
+                  name: s.stat.name,
+                  base: s.base_stat,
+                })),
             };
           })
         );
