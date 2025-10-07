@@ -1,9 +1,13 @@
-interface BadgeProps {
+import { typeColors } from "../../utils/typeColors";
+
+interface TypeButtonProps {
+    onClick?: () => void;
     type: string;
 }
 
-const Badge = ({ type }: BadgeProps) => {
-    return <span className="bg-gray-100 text-sm px-2 py-0.5 rounded-full">{type}</span>
+const TypeButton = ({ onClick, type }: TypeButtonProps) => {
+    const color = typeColors[type.toLowerCase()] || "#A8A77A";
+    return <span className="text-sm px-2 py-1 items-center rounded-lg" style={{ backgroundColor: color, display: "inline-block", verticalAlign: "middle" }} onClick={onClick}>{type}</span>
 };
 
-export default Badge;
+export default TypeButton;

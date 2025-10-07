@@ -1,15 +1,21 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import type { Pokemon } from "../types/types";
 import { usePokemon } from "../hooks/usePokemon";
+import { useType } from "../hooks/useType";
 
 interface PokemonContextProps {
     pokemons: Pokemon[],
     filteredPokemons: Pokemon[],
+    types: string[],
     setPokemons: React.Dispatch<React.SetStateAction<Pokemon[]>>,
     searchTerm: string,
     setSearchTerm: (term: string) => void,
-    loading: boolean,
-    error: string | null;
+    selectedType: string,
+    setSelectedType: (term: string) => void,
+    pokemonLoading: boolean,
+    pokemonError: string | null;
+    typesLoading: boolean,
+    typesError: string | null;
 };
 
 export const PokemonContext = createContext<PokemonContextProps | undefined>(undefined);
@@ -17,28 +23,33 @@ export const PokemonContext = createContext<PokemonContextProps | undefined>(und
 export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const [searchTerm, setSearchTerm] = useState<string>("")
-    const { pokemons, setPokemons, loading, error } = usePokemon();
+    const [selectedType, setSelectedType] = useState<string>("")
+    const { pokemons, setPokemons, loading: pokemonLoading, error: pokemonError } = usePokemon();
+    const { types, loading: typesLoading, error: typesError } = useType();
 
     const filteredPokemons = useMemo(() => {
-        if (searchTerm === "") {
-            return pokemons;
-        }
         return pokemons.filter((pokemon) => {
-            return pokemon.name.toLowerCase().includes(searchTerm)
-
+            const searchMatch = searchTerm === "" || pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
+            const typeMatch = selectedType === "" || pokemon.types.some(t => t.name === selectedType);
+            return searchMatch && typeMatch;
         });
-    }, [pokemons, searchTerm])
+    }, [pokemons, searchTerm, selectedType])
 
 
     const value = useMemo(() => ({
         pokemons,
         filteredPokemons,
+        types,
         setPokemons,
         setSearchTerm,
         searchTerm,
-        loading,
-        error
-    }), [pokemons, filteredPokemons, loading, error]);
+        selectedType,
+        setSelectedType,
+        pokemonLoading,
+        pokemonError,
+        typesLoading,
+        typesError
+    }), [pokemons, filteredPokemons, types, pokemonLoading, typesLoading, pokemonError, typesError, selectedType]);
 
     return (
         <PokemonContext.Provider value={value}>
