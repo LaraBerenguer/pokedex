@@ -22,7 +22,7 @@ function Home() {
       <section className="home-search">
         <Search />
       </section>
-      <section className="home-filter">
+      <section className="home-filter overflow-x-auto">
         {typesLoading ?
           (<p className="text-xs w-full text-center">Loading types...</p>
           ) : typesError ? (
