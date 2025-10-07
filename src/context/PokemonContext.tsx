@@ -10,6 +10,8 @@ interface PokemonContextProps {
     setPokemons: React.Dispatch<React.SetStateAction<Pokemon[]>>,
     searchTerm: string,
     setSearchTerm: (term: string) => void,
+    selectedType: string,
+    setSelectedType: (term: string) => void,
     pokemonLoading: boolean,
     pokemonError: string | null;
     typesLoading: boolean,
@@ -21,18 +23,17 @@ export const PokemonContext = createContext<PokemonContextProps | undefined>(und
 export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const [searchTerm, setSearchTerm] = useState<string>("")
+    const [selectedType, setSelectedType] = useState<string>("")
     const { pokemons, setPokemons, loading: pokemonLoading, error: pokemonError } = usePokemon();
     const { types, loading: typesLoading, error: typesError } = useType();
 
     const filteredPokemons = useMemo(() => {
-        if (searchTerm === "") {
-            return pokemons;
-        }
         return pokemons.filter((pokemon) => {
-            return pokemon.name.toLowerCase().includes(searchTerm)
-
+            const searchMatch = searchTerm === "" || pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
+            const typeMatch = selectedType === "" || pokemon.types.some(t => t.name === selectedType);
+            return searchMatch && typeMatch;
         });
-    }, [pokemons, searchTerm])
+    }, [pokemons, searchTerm, selectedType])
 
 
     const value = useMemo(() => ({
@@ -42,11 +43,13 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setPokemons,
         setSearchTerm,
         searchTerm,
+        selectedType,
+        setSelectedType,
         pokemonLoading,
         pokemonError,
         typesLoading,
         typesError
-    }), [pokemons, filteredPokemons, types, pokemonLoading, typesLoading, pokemonError, typesError]);
+    }), [pokemons, filteredPokemons, types, pokemonLoading, typesLoading, pokemonError, typesError, selectedType]);
 
     return (
         <PokemonContext.Provider value={value}>
