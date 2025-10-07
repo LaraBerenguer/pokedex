@@ -33,7 +33,7 @@ export function usePokemon() {
             const uId = getUrlId(pokemon.url)
 
             return {
-              id: uId,
+              id: parseInt(uId),
               name: pokemon.name,
               image: d.sprites.front_default,
               types: d.types.map((t: any) => ({
@@ -41,10 +41,11 @@ export function usePokemon() {
               })),
               weight: d.weight,
               height: d.height,
-              stats: d.stats.map((s: any) => ({
-                name: s.stat.name,
-                base: s.base_stat,
-              })),
+              stats: d.stats.filter((s: any) => ["hp", "attack", "defense", "speed"].includes(s.stat.name))
+                .map((s: any) => ({
+                  name: s.stat.name,
+                  base: s.base_stat,
+                })),
             };
           })
         );

@@ -1,11 +1,24 @@
-import { Link } from "react-router";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { usePokemonContext } from "../context/PokemonContext";
+import type { Pokemon } from "../types/types";
+import DetailsCard from "../components/DetailsCard";
 
 function Details() {
-  return (    
+  const { id } = useParams<{ id: string }>();
+  const { pokemons } = usePokemonContext();
+  const [currentPokemon, setCurrentPokemon] = useState<Pokemon>()
+
+  useEffect(() => {
+    if (id && pokemons.length > 0) {
+      const foundPokemon = pokemons.find(p => p.id === Number(id));
+      setCurrentPokemon(foundPokemon);
+    }
+  }, [id, pokemons]);
+
+  return (
     <>
-    <h1>This is a pokemon</h1>
-    <div>Look how nice</div>
-    <Link to="/" className="btn">Back</Link>
+      <DetailsCard pkm={currentPokemon} />
     </>
   );
 };

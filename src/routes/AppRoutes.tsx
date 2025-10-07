@@ -22,7 +22,7 @@ const AppRoutes = () => {
         <>
             <Routes>
                 <Route path="/" element={<LazyWrapper component={Home} />} />
-                <Route path="/pokemon" element={<LazyWrapper component={Details} />} />
+                <Route path="/pokemon/:id" element={<LazyWrapper component={Details} />} />
                 <Route path='*' element={<LazyWrapper component={NotFoundPage} />} />
                 <Route path="/500" element={<LazyWrapper component={Error500} />} />
             </Routes>
