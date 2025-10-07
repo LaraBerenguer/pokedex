@@ -16,3 +16,8 @@ export type Stats = {
 export type Type = {
     name: string;
 };
+
+export type ColoredType = {
+    type: string;
+    color: string;
+}

@@ -1,11 +1,11 @@
 import PokemonCard from "../components/PokemonCard";
 import Search from "../components/Search";
-import Badge from "../components/ui/Badge";
+import Filter from "../components/ui/Filter";
 import Spinner from "../components/ui/Spinner";
 import { usePokemonContext } from "../context/PokemonContext";
 
 function Home() {
-  const { filteredPokemons, pokemonLoading, pokemonError, types, typesLoading, typesError } = usePokemonContext()
+  const { filteredPokemons, pokemonLoading, pokemonError } = usePokemonContext()
   if (pokemonLoading) { return <Spinner /> }
   if (pokemonError) {
     return (
@@ -23,16 +23,7 @@ function Home() {
         <Search />
       </section>
       <section className="home-filter overflow-x-auto">
-        {typesLoading ?
-          (<p className="text-xs w-full text-center">Loading types...</p>
-          ) : typesError ? (
-            (<p className="text-sm w-full text-center">Error loading types: {typesError}</p>)
-          ) : (
-            types.map(type => (
-              <Badge type={type} />
-            ))
-          )
-        }
+        <Filter />
       </section>
       <section className="home-list gap-2 flex flex-wrap">
         {filteredPokemons.length ? filteredPokemons.map(p => <PokemonCard key={p.id} pkm={p} />) :
