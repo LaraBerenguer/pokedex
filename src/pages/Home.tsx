@@ -1,11 +1,15 @@
+import FavoriteFilter from "../components/FavoriteFilter";
 import PokemonCard from "../components/PokemonCard";
 import Search from "../components/Search";
 import Filter from "../components/ui/Filter";
 import Spinner from "../components/ui/Spinner";
 import { usePokemonContext } from "../context/PokemonContext";
+import { useFavorite } from "../hooks/useFavorite";
 
 function Home() {
   const { filteredPokemons, pokemonLoading, pokemonError } = usePokemonContext()
+  const { toggleFavorite, isFavorite } = useFavorite();
+
   if (pokemonLoading) { return <Spinner /> }
   if (pokemonError) {
     return (
@@ -19,14 +23,21 @@ function Home() {
 
   return (
     <section className="home flex flex-col gap-3 p-4">
-      <section className="home-search">
+      <section className="home-search flex gap-3">
         <Search />
+        <FavoriteFilter />
       </section>
       <section className="home-filter overflow-x-auto">
         <Filter />
       </section>
       <section className="home-list gap-2 flex flex-wrap">
-        {filteredPokemons.length ? filteredPokemons.map(p => <PokemonCard key={p.id} pkm={p} />) :
+        {filteredPokemons.length ? filteredPokemons.map(p =>
+          <PokemonCard
+            key={p.id}
+            pkm={p}
+            onToggleFavorite={toggleFavorite}
+            isFavorite={isFavorite(p.id)}
+          />) :
           <p className="text-sm w-full text-center">Oops! There's no pokemon in this tall grass 🍃</p>}
       </section>
     </section>
