@@ -35,7 +35,6 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({ child
         });
     }, [pokemons, searchTerm, selectedType])
 
-
     const value = useMemo(() => ({
         pokemons,
         filteredPokemons,
