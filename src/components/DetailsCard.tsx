@@ -26,8 +26,8 @@ const DetailsCard = ({ pkm }: DetailsCardProps) => {
             <div className="details-card--back self-start">
                 <GoBackButton onClick={handleGoBack} />
             </div>
-            <div className="details-card--info flex w-full gap-6">
-                <div className="flex-2/3">
+            <div className="details-card--info flex w-full gap-6 justify-between">
+                <div className="">
                     <section className="details-card--name text-2xl font-semibold text-gray-800">
                         <h2>{capitalizeFirstLetter(pkm.name)}</h2>
                     </section>
@@ -48,7 +48,7 @@ const DetailsCard = ({ pkm }: DetailsCardProps) => {
                         </div>
                     </section>
                 </div>
-                <div className="details-card--stats w-full mt-4 flex-1/3">
+                <div className="details-card--stats w-full mt-4">
                     <Stats pkm={pkm} />
                 </div>
             </div>
