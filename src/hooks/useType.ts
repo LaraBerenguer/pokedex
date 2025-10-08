@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-
-interface rawTypes {
-    name: string,
-    url: string
-}
+import { typeService } from "../services/typeService";
 
 export function useType() {
     const [types, setTypes] = useState<string[]>([]);
@@ -16,11 +12,7 @@ export function useType() {
                 setLoading(true);
                 setError("");
 
-                const response = await fetch("https://pokeapi.co/api/v2/type/");
-                if (!response.ok) throw new Error(`Error fetching pokémon types! Try again`);
-                const data = await response.json();
-
-                const allTypes = data.results.map((type: rawTypes) => type.name);
+                const allTypes = await typeService.fetchTypes();
                 setTypes(allTypes);
             } catch (err) {
                 if (err instanceof Error) {
