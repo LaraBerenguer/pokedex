@@ -16,7 +16,7 @@ const Filter = () => {
                     (<p className="text-sm w-full text-center">Error loading types: {typesError}</p>)
                 ) : (
                     types.map(type => (
-                        <Badge key={type} type={type} onClick={() => handleClick(type)} />
+                        <Badge key={type} type={type} selected={selectedType === type} onClick={() => handleClick(type)} />
                     ))
                 )
             }

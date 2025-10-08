@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';
 import Spinner from '../components/ui/Spinner';
-//import Loading from '../components/Loading/Loading';
+import Layout from '../layout/Layout';
 
 const Home = lazy(() => import('../pages/Home'));
 const Details = lazy(() => import('../pages/Details'));
@@ -19,14 +19,14 @@ const LazyWrapper = ({ component: Component }: { component: React.ComponentType 
 
 const AppRoutes = () => {
     return (
-        <>
+        <Layout>
             <Routes>
                 <Route path="/" element={<LazyWrapper component={Home} />} />
                 <Route path="/pokemon/:id" element={<LazyWrapper component={Details} />} />
                 <Route path='*' element={<LazyWrapper component={NotFoundPage} />} />
                 <Route path="/500" element={<LazyWrapper component={Error500} />} />
             </Routes>
-        </>
+        </Layout>
     )
 };
 
