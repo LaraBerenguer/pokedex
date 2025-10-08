@@ -22,15 +22,15 @@ function Home() {
   }
 
   return (
-    <section className="home flex flex-col gap-3 p-4">
-      <section className="home-search flex gap-3">
+    <div className="h-full w-full flex flex-col">
+      <section className="home-search flex gap-3 mb-3">
         <Search />
         <FavoriteFilter />
       </section>
-      <section className="home-filter overflow-x-auto">
+      <section className="home-filter overflow-x-auto mb-3">
         <Filter />
       </section>
-      <section className="home-list gap-2 flex flex-wrap">
+      <section className="home-list gap-2 flex flex-wrap flex-1 overflow-y-auto">
         {filteredPokemons.length ? filteredPokemons.map(p =>
           <PokemonCard
             key={p.id}
@@ -40,7 +40,7 @@ function Home() {
           />) :
           <p className="text-sm w-full text-center">Oops! There's no pokemon in this tall grass 🍃</p>}
       </section>
-    </section>
+    </div>
   );
 };
 

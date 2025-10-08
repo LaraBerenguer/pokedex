@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 const Error500 = () => {
     return (
-        <main className="grid min-h-full place-items-center px-6 py-14 sm:py-14 lg:px-8">
+        <div className="h-full w-full flex items-center justify-center">
             <div className="text-center">
                 <p className="text-base font-semibold">500</p>
                 <h1 className="mt-4 text-5xl font-semibold tracking-tight text-balance sm:text-7xl">
@@ -15,7 +15,7 @@ const Error500 = () => {
                     <Link to="/" className="btn btn-primary">Go back Home</Link>
                 </div>
             </div>
-        </main>
+        </div>
     );
 };
 

@@ -17,9 +17,9 @@ function Details() {
   }, [id, pokemons]);
 
   return (
-    <>
+    <div className="h-auto w-full flex items-center justify-center">
       <DetailsCard pkm={currentPokemon} />
-    </>
+    </div>
   );
 };
 
