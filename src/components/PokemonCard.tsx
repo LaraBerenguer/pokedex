@@ -34,7 +34,7 @@ const PokemonCard = ({ pkm, onToggleFavorite, isFavorite }: PokemonCardProps) =>
                         className="w-24 h-24 object-contain"
                     />
                 </section>
-                <section className="pokemon-card--name text-lg font-semibold text-gray-800 text-center">
+                <section className="pokemon-card--name font-oxanium text-lg font-semibold text-gray-800 text-center">
                     {capitalizeFirstLetter(pkm.name)}
                 </section>
                 <section className="pokemon-card--types flex gap-2 flex-wrap justify-center">

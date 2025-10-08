@@ -28,7 +28,7 @@ const DetailsCard = ({ pkm }: DetailsCardProps) => {
             </div>
             <div className="details-card--info flex w-full gap-6 justify-between">
                 <div className="">
-                    <section className="details-card--name text-2xl font-semibold text-gray-800">
+                    <section className="details-card--name font-oxanium text-2xl font-semibold text-gray-800">
                         <h2>{capitalizeFirstLetter(pkm.name)}</h2>
                     </section>
                     <section className="details-card--img h-40 flex justify-center">

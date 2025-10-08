@@ -7,7 +7,7 @@ interface StatsProps {
 const Stats = ({ pkm }: StatsProps) => {
     return (
         <div className="w-2/3 mt-4 mx-auto">
-            <h3 className="text-lg font-medium text-gray-700 mb-2 text-center">Stats</h3>
+            <h3 className="text-lg font-medium font-oxanium text-gray-700 mb-2 text-center">Stats</h3>
             <section className="flex flex-col gap-3">
                 {pkm.stats.map((s) => {
                     const percent = Math.min((s.base / 150) * 100, 100);
