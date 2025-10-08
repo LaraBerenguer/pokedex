@@ -1,5 +1,7 @@
 # Pokédex React (Hackaton project)
 
+Proyecto hecho por: Lara Berenguer
+
 Esta es mi Pokédex, hecha con React, TypeScript y Vite. Se puede navegar por los 50 primeros Pokémon, ver detalles, filtar por tipo, buscar por nombre y guardar como favoritos (con persistencia en localStorage). Los datos vienen de la [PokéAPI](https://pokeapi.co/). ¡Que la disfrutes!
 
 ## 💡 Funcionalidades
@@ -92,6 +94,9 @@ pokedex/
 │   │   └── NotFound.tsx     # Página 404
 │   ├── routes/              # Configuración de rutas
 │   │   └── AppRoutes.tsx    # Definiciones de rutas
+│   ├── services/              # Configuración de rutas
+│   │   ├── pokemonServices.tsoutes.tsx     # Fetching de datos pokemon
+│   │   └── typeServices.ts                 # Fetching de datos de tipos
 │   ├── types/               # Definiciones de tipos TypeScript
 │   │   └── types.ts         # Tipos de datos de Pokémon
 │   ├── utils/               # Funciones de utilidad
