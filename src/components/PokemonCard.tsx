@@ -23,7 +23,7 @@ const PokemonCard = ({ pkm, onToggleFavorite, isFavorite }: PokemonCardProps) =>
 
     return (
         <div className="pokemon-card border-2 border-gray-200 shadow-sm p-2 flex flex-col gap-2">
-            <div className="pokemon--card-fav">
+            <div className="pokemon--card-fav flex self-end">
                 <FavIcon onClick={handleFavorites} isFavorite={isFavorite} />
             </div>
             <div className="pokemon-card--info">
