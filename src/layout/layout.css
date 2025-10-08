@@ -1,0 +1,20 @@
+.layout {
+    position: relative;
+    background-image: url('/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.layout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(236, 72, 154, 0.4);
+    pointer-events: none;
+    z-index: 1;
+}
