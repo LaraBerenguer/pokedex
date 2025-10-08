@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import "./layout.css";
+import Logo from "../components/Logo";
 
 interface LayoutProps {
     children: ReactNode;
@@ -12,7 +13,10 @@ const Layout = ({ children }: LayoutProps) => {
                 <div className="layout-rounded bg-rose-300/95 backdrop-blur-md rounded-2xl shadow- p-3">
                     <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl w-[60vw] h-[80vh] overflow-hidden flex flex-col">
                         <div className="p-6 h-full w-full overflow-y-auto flex flex-col">
-                            {children}
+                            <Logo className="flex-shrink-0" />
+                            <div className="flex-1 overflow-y-auto hide-scrollbar">
+                                {children}
+                            </div>
                         </div>
                     </div>
                 </div>
