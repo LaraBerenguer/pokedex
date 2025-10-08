@@ -8,14 +8,14 @@ const FavoriteFilter = () => {
         <div className="favorite-filter justify-center flex gap-1">
             <button
                 type="button"
-                className="px-3 py-1 rounded-md bg-transparent hover:bg-gray-100 dark:hover:bg-gray-600 focus:bg-gray-100 dark:focus:bg-gray-600 text-sm font-medium transition act"
+                className="cursor-pointer px-3 py-1 rounded-md bg-transparent border-1 border-transparent transition-all duration-200 hover:border-pink-400 hover:text-pink-400 focus:bg-pink-200 text-sm font-medium"
                 onClick={() => setSelectedFilter("all")}
             >
                 All
             </button>
             <button
                 type="button"
-                className="px-3 py-1 rounded-md bg-transparent hover:bg-gray-100 dark:hover:bg-gray-600 focus:bg-gray-100 dark:focus:bg-gray-600 text-sm font-medium transition"
+                className="cursor-pointer px-3 py-1 rounded-md bg-transparent border-1 border-transparent transition-all duration-200 hover:border-pink-400 hover:text-pink-400 focus:bg-pink-200 text-sm font-medium"
                 onClick={() => setSelectedFilter("favorites")}
             >
                 Favorites

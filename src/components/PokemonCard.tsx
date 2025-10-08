@@ -22,22 +22,31 @@ const PokemonCard = ({ pkm, onToggleFavorite, isFavorite }: PokemonCardProps) =>
     }
 
     return (
-        <div className="pokemon-card border-2 border-gray-200 shadow-sm p-2 flex flex-col gap-2">
+        <div className="pokemon-card w-64 min-w-[250px] border-2 border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 flex flex-col gap-3 rounded-xl bg-white">
             <div className="pokemon--card-fav flex self-end">
                 <FavIcon onClick={handleFavorites} isFavorite={isFavorite} />
             </div>
-            <div className="pokemon-card--info">
-                <section className="pokemon-card--img">
-                    <img src={`${pkm.image}`}></img>
+            <div className="pokemon-card--info flex flex-col items-center gap-3">
+                <section className="pokemon-card--img w-full flex justify-center">
+                    <img 
+                        src={`${pkm.image}`} 
+                        alt={pkm.name}
+                        className="w-24 h-24 object-contain"
+                    />
                 </section>
-                <section className="pokemon-card--name">
+                <section className="pokemon-card--name text-lg font-semibold text-gray-800 text-center">
                     {capitalizeFirstLetter(pkm.name)}
                 </section>
-                <section className="pokemon-card--types flex gap-2">
+                <section className="pokemon-card--types flex gap-2 flex-wrap justify-center">
                     {pkm.types.map(t => <Badge key={t.name} type={t.name} />)}
                 </section>
             </div>
-            <button className="details-button border-1 border-gray-400 rounded-lg p-1" onClick={handleViewDetails}>View Details</button>
+            <button 
+                className="details-button cursor-pointer border border-gray-400 rounded-lg p-2 mt-auto font-medium text-gray-700 transition-all duration-200 hover:text-pink-400 hover:border-pink-400 hover:shadow-md" 
+                onClick={handleViewDetails}
+            >
+                View Details
+            </button>
         </div>
     )
 
