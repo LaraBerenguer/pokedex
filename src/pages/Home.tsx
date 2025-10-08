@@ -30,7 +30,7 @@ function Home() {
       <section className="home-filter overflow-x-auto mb-3">
         <Filter />
       </section>
-      <section className="home-list gap-2 flex flex-wrap flex-1 overflow-y-auto">
+      <section className="home-list gap-2 flex flex-wrap flex-1 overflow-y-auto justify-center">
         {filteredPokemons.length ? filteredPokemons.map(p =>
           <PokemonCard
             key={p.id}
