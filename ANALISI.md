@@ -35,6 +35,16 @@ App (main.tsx)
 
 ## Decisiones Técnicas Tomadas
 
+### Gestión de Datos
+
+**Decisión: Endpoint para Pokémon y Endpoint para Types**
+
+En el PDF se especifican los tres endpoint que hay que utilizar. Sin embargo, en mi proyecto he tomado una decisión que me hacía mucho más sencilla la recopilación de datos de los pokémon:
+
+A partir de la llamada principal a GET /pokemon?limit=50, se extrae la lista de resultados y realizo una segunda llamada individual a la URL de detalle (pokemon.url) incluida en cada elemento de la respuesta. Esto me permite recoger la info necesaria de cada pokémon (imagen, tipos, peso, altura y estadísticas filtradas), evitando la necesidad de gestionar manualmente el endpoint /pokemon/{id} y simplificando la lógica de fetching.
+
+Se sigue manteniendo la separación de responsabilidades gracias al servicio dedicado y obtengo control total sobre lo que recibo sin sobrecarga de datos.
+
 ### Gestión de Estado
 
 **Decisión: React Context API sobre Redux**
